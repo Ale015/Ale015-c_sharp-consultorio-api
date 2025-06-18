@@ -1,0 +1,25 @@
+services:
+    db:
+        image: postgres:latest
+        environment:
+            POSTGRES_USER: jr
+            POSTGRES_PASSWORD: 1234
+            POSTGRES_DB: db_consultorio
+        ports:
+            - "5432:5432"
+        networks:
+            - consultorio_net
+    
+    cl.webapi:
+        image: ${DOCKER_REGISTRY-}clwebapi
+        build:
+            context: .
+            dockerfile: CL.WebApi/Dockerfile
+        depends_on:
+            - db
+        networks:
+            - consultorio_net
+
+networks:
+    consultorio_net:
+        driver: bridge

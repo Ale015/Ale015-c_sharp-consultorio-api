@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "J0QfjMsMc1eKZz86jvtaw11kCoUK8+NJleQT8sbNIbA=",
+  "Source": "CL.WebApi",
+  "BasePath": "_content/CL.WebApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
