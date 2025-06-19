@@ -1129,7 +1129,9 @@
       },
       "CL.Core/1.0.0": {
         "dependencies": {
-          "FluentAssertions": "8.3.0"
+          "FluentAssertions": "8.3.0",
+          "Npgsql": "9.0.3",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4"
         },
         "runtime": {
           "CL.Core.dll": {
@@ -1142,7 +1144,9 @@
         "dependencies": {
           "CL.Core": "1.0.0",
           "FluentAssertions": "8.3.0",
-          "Microsoft.EntityFrameworkCore": "9.0.5"
+          "Microsoft.EntityFrameworkCore": "9.0.5",
+          "Npgsql": "9.0.3",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4"
         },
         "runtime": {
           "CL.Data.dll": {
@@ -1153,7 +1157,9 @@
       },
       "CL.Manager/1.0.0": {
         "dependencies": {
-          "FluentAssertions": "8.3.0"
+          "FluentAssertions": "8.3.0",
+          "Npgsql": "9.0.3",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4"
         },
         "runtime": {
           "CL.Manager.dll": {

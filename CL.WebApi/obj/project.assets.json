@@ -1750,7 +1750,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "FluentAssertions": "8.3.0"
+          "FluentAssertions": "8.3.0",
+          "Npgsql": "9.0.3",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4"
         },
         "compile": {
           "bin/placeholder/CL.Core.dll": {}
@@ -1765,7 +1767,9 @@
         "dependencies": {
           "CL.Core": "1.0.0",
           "FluentAssertions": "8.3.0",
-          "Microsoft.EntityFrameworkCore": "9.0.5"
+          "Microsoft.EntityFrameworkCore": "9.0.5",
+          "Npgsql": "9.0.3",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4"
         },
         "compile": {
           "bin/placeholder/CL.Data.dll": {}
@@ -1778,7 +1782,9 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
-          "FluentAssertions": "8.3.0"
+          "FluentAssertions": "8.3.0",
+          "Npgsql": "9.0.3",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4"
         },
         "compile": {
           "bin/placeholder/CL.Manager.dll": {}

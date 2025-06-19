@@ -31,3 +31,4 @@ D:\Programacao\Projetos\csharp\c_sharp-consultorio-api\bin\Debug\CL.Data.pdb
 D:\Programacao\Projetos\csharp\c_sharp-consultorio-api\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
 D:\Programacao\Projetos\csharp\c_sharp-consultorio-api\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
 D:\Programacao\Projetos\csharp\c_sharp-consultorio-api\obj\Debug\docker-c.35A3FFBA.Up2Date
+D:\Programacao\Projetos\csharp\c_sharp-consultorio-api\bin\Debug\Microsoft.EntityFrameworkCore.Relational.dll
