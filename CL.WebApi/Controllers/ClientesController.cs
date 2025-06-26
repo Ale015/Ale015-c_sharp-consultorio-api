@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CL.Core.Domain;
+using CL.Manager.Interfaces;
 
 namespace CL.WebApi.Controllers;
 
@@ -8,10 +9,16 @@ namespace CL.WebApi.Controllers;
 [ApiController]
 public class ClientesController : ControllerBase
 {
+    private readonly IClienteManager _clienteManager;
+
+    public ClientesController(IClienteManager clienteManager)
+    {
+        _clienteManager = clienteManager;
+    }
+
     [HttpGet]
     public IEnumerable<Cliente> Get()
     {
-
         return new List<Cliente>()
         {
             new Cliente()
@@ -26,7 +33,7 @@ public class ClientesController : ControllerBase
                 Nome = "Cliente 2",
                 DataNascimento = new DateTime(1980,03,15)
             }
-        };   
+        };
     }
 
     [HttpGet("{id}")]
@@ -36,4 +43,11 @@ public class ClientesController : ControllerBase
         return $"Id: Escolhido {id.ToString()}";
     }
 
+    [HttpPost]
+    public async Task<IActionResult> Post([FromBody] Cliente cliente)
+    {
+        var result = await _clienteManager.AdicionarUmCliente(cliente);
+
+        return Ok(result);
+    }
 }

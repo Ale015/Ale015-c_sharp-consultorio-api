@@ -1,5 +1,8 @@
 // Cria o builder da WebApplication para adicionar as dependências e configurar o pipeline de requisições.
 using CL.Data.Context;
+using CL.Data.Repository;
+using CL.Manager.Implementations;
+using CL.Manager.Interfaces;
 using FluentAssertions.Common;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +16,10 @@ builder.Services.AddDbContext<ClContext>(options => options.UseNpgsql(builder.Co
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IClienteManager, ClienteManager>();
+
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 
 // Adição de serviços de injeção de dependência
 var app = builder.Build();
