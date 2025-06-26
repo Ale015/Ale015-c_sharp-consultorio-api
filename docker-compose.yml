@@ -9,6 +9,9 @@ services:
             - "5432:5432"
         networks:
             - consultorio_net
+        volumes:
+            - db_data:/var/lib/postgresql/data
+
     
     cl.webapi:
         image: ${DOCKER_REGISTRY-}clwebapi
@@ -23,3 +26,6 @@ services:
 networks:
     consultorio_net:
         driver: bridge
+
+volumes:
+    db_data:    
