@@ -9,6 +9,6 @@ namespace CL.Manager.Interfaces
 {
     public interface IClienteManager
     {
-        public Task<Cliente> AdicionarUmCliente(Cliente clientinho);
+        public Task<Cliente> AdicionarUmCliente(Cliente cliente);
     }
 }

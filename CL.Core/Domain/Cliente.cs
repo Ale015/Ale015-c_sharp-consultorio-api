@@ -12,5 +12,20 @@ namespace CL.Core.Domain
         public string Nome { get; set; }
         public DateTime DataNascimento { get; set; }
 
+        public Cliente(Cliente cliente)
+        {
+            Id = cliente.Id;
+            Nome = cliente.Nome;
+            DataNascimento = cliente.DataNascimento;
+        }
+
+        public Cliente()
+        {
+
+        }
+
+
     }
+
+
 }

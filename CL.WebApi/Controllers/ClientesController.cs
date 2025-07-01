@@ -5,10 +5,11 @@ using CL.Manager.Interfaces;
 
 namespace CL.WebApi.Controllers;
 
-[Route("api/[controller]")]
 [ApiController]
+[Route("api/[controller]")]
 public class ClientesController : ControllerBase
 {
+    // Injeção de dependências
     private readonly IClienteManager _clienteManager;
 
     public ClientesController(IClienteManager clienteManager)
@@ -16,38 +17,38 @@ public class ClientesController : ControllerBase
         _clienteManager = clienteManager;
     }
 
+    // GET All
     [HttpGet]
-    public IEnumerable<Cliente> Get()
+    public async Task<IActionResult> Get()
     {
-        return new List<Cliente>()
-        {
-            new Cliente()
-            {
-                Id = 1,
-                Nome = "Cliente 1",
-                DataNascimento = new DateTime(1980,01,22)
-            },
-            new Cliente()
-            {
-                Id = 2,
-                Nome = "Cliente 2",
-                DataNascimento = new DateTime(1980,03,15)
-            }
-        };
+       
     }
 
+    // GET - pelo ID do cliente
     [HttpGet("{id}")]
-    public string GetId(int id)
-    {
-        // retorna o id
-        return $"Id: Escolhido {id.ToString()}";
-    }
+   
 
+    // POST - Criar novo cliente
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] Cliente cliente)
     {
-        var result = await _clienteManager.AdicionarUmCliente(cliente);
 
-        return Ok(result);
+        var clienteAdicionado = await _clienteManager.AdicionarUmCliente(cliente);
+
+        if (clienteAdicionado == null)
+        {
+            return BadRequest("Erro ao adicionar cliente.");
+        }
+
+        return Created("", clienteAdicionado);
+
     }
+   
+
+    // PUT - Atualizar um cliente pelo Id
+
+
+
+    // DELETE - Deletar Cliente pelo Id
+
 }
