@@ -19,14 +19,32 @@ public class ClientesController : ControllerBase
 
     // GET All
     [HttpGet]
-    public async Task<IActionResult> Get()
+    public async Task<IActionResult> GetAll()
     {
-       
+        var clientes = await _clienteManager.BuscarTodosClientes();
+
+        if (clientes == null || clientes.Count == 0)
+        {
+            return NotFound("Nenhum cliente encontrado.");
+        }
+
+        return Ok(clientes);
     }
 
     // GET - pelo ID do cliente
     [HttpGet("{id}")]
-   
+   public async Task<IActionResult> GetById(int id)
+    {
+        if (id == 0)
+        {
+            return BadRequest("Id inválido.");
+        }
+
+        var cliente = await _clienteManager.BuscarClientePorId(id);
+
+        return cliente != null ? Ok(cliente) : NotFound("Cliente não encontrado.");
+
+    }
 
     // POST - Criar novo cliente
     [HttpPost]

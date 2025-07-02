@@ -1,6 +1,7 @@
 ﻿using CL.Core.Domain;
 using CL.Data.Context;
 using CL.Manager.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +19,29 @@ namespace CL.Data.Repository
             _context = context;
         }
 
-        public async Task<Cliente> Inserir(Cliente clientinho)
+        public async Task<Cliente> Inserir(Cliente cliente)
         {
-            _context.Clientes.Add(clientinho);
+            _context.Clientes.Add(cliente);
 
             await _context.SaveChangesAsync();
 
-            return clientinho;
+            return cliente;
         }
+
+
+        public async Task<List<Cliente>> BuscarTodos()
+        {
+            return await _context.Clientes.ToListAsync();
+        }
+
+
+        public async Task<List<Cliente>> BuscarId(int id)
+        {
+
+            return await _context.Clientes.Where(c => c.Id == id).ToListAsync();
+
+        }
+
+
     }
 }
