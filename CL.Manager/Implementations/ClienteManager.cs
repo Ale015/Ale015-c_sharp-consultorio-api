@@ -19,6 +19,34 @@ public class ClienteManager : IClienteManager
 
     public async Task<Cliente> AdicionarUmCliente(Cliente clientinho)
     {
+
+        if (clientinho == null)
+        {
+            throw new ArgumentNullException(nameof(clientinho), "Cliente não pode ser nulo.");
+        }
+
+        if (string.IsNullOrWhiteSpace(clientinho.Nome))
+        {
+            throw new ArgumentException("Nome do cliente não pode ser vazio.", nameof(clientinho.Nome));
+        }
+
+        if (clientinho.DataNascimento == default(DateTime))
+        {
+            throw new ArgumentException("Data de nascimento do cliente não pode ser inválida.", nameof(clientinho.DataNascimento));
+        }
+
+
+
         return await _clienteRepository.Inserir(clientinho);
+    }
+
+    public Task<List<Cliente>> BuscarClientePorId(int id)
+    {
+        return _clienteRepository.BuscarId(id);
+    }
+
+    public Task<List<Cliente>> BuscarTodosClientes()
+    {
+        return _clienteRepository.BuscarTodos();
     }
 }

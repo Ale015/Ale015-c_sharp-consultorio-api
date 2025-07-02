@@ -9,6 +9,11 @@ namespace CL.Manager.Interfaces
 {
     public interface IClienteRepository
     {
-        public Task<Cliente> Inserir(Cliente clientinho);
+        public Task<Cliente> Inserir(Cliente cliente);
+
+        public Task<List<Cliente>> BuscarTodos();
+
+        public Task<List<Cliente>> BuscarId(int id);
+
     }
 }

@@ -10,5 +10,9 @@ namespace CL.Manager.Interfaces
     public interface IClienteManager
     {
         public Task<Cliente> AdicionarUmCliente(Cliente cliente);
+
+        public Task<List<Cliente>> BuscarTodosClientes();
+
+        public Task<List<Cliente>> BuscarClientePorId(int id);
     }
 }
