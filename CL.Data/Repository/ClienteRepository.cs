@@ -44,6 +44,14 @@ namespace CL.Data.Repository
 
         public async Task<Cliente> Atualizar(Cliente cliente)
         {
+
+            Cliente clienteFinded = await _context.Clientes.FindAsync(cliente.Id);
+
+            if (clienteFinded == null)
+            {
+                throw new KeyNotFoundException("Cliente não encontrado.");
+            }
+
             _context.Clientes.Update(cliente);
             await _context.SaveChangesAsync();
             return cliente;
