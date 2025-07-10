@@ -30,11 +30,6 @@ public class ClienteManager : IClienteManager
             throw new ArgumentException("Nome do cliente não pode ser vazio.", nameof(clientinho.Nome));
         }
 
-        if (clientinho.DataNascimento == default(DateTime))
-        {
-            throw new ArgumentException("Data de nascimento do cliente não pode ser inválida.", nameof(clientinho.DataNascimento));
-        }
-
 
 
         return await _clienteRepository.Inserir(clientinho);

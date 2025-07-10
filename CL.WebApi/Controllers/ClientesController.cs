@@ -50,8 +50,13 @@ public class ClientesController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] Cliente cliente)
     {
+        var clienteInterno = new Cliente
+        {
+            Nome = cliente.Nome,
+            DataNascimento = cliente.DataNascimento
+        };
 
-        var clienteAdicionado = await _clienteManager.AdicionarUmCliente(cliente);
+        var clienteAdicionado = await _clienteManager.AdicionarUmCliente(clienteInterno);
 
         if (clienteAdicionado == null)
         {
