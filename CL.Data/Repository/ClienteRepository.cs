@@ -42,6 +42,26 @@ namespace CL.Data.Repository
 
         }
 
+        public async Task<Cliente> Atualizar(Cliente cliente)
+        {
+            _context.Clientes.Update(cliente);
+            await _context.SaveChangesAsync();
+            return cliente;
+        }
+
+        public async Task<bool> Excluir(int id)
+        {
+            var cliente = await _context.Clientes.FindAsync(id);
+
+            if (cliente == null)
+            {
+                return false;
+            }
+
+            _context.Clientes.Remove(cliente);
+
+            return true;
+        }
 
     }
 }

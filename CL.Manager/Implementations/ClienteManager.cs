@@ -30,14 +30,21 @@ public class ClienteManager : IClienteManager
             throw new ArgumentException("Nome do cliente não pode ser vazio.", nameof(clientinho.Nome));
         }
 
-        if (clientinho.DataNascimento == default(DateTime))
-        {
-            throw new ArgumentException("Data de nascimento do cliente não pode ser inválida.", nameof(clientinho.DataNascimento));
-        }
-
 
 
         return await _clienteRepository.Inserir(clientinho);
+    }
+
+    public Task<List<Cliente>> BuscarTodosClientes()
+    {
+        List<Cliente> clientes = new List<Cliente>();
+        return _clienteRepository.BuscarTodos();
+    }
+
+
+    public Task<Cliente> AtualizarCliente(Cliente cliente)
+    {
+        throw new NotImplementedException();
     }
 
     public Task<List<Cliente>> BuscarClientePorId(int id)
@@ -45,8 +52,8 @@ public class ClienteManager : IClienteManager
         return _clienteRepository.BuscarId(id);
     }
 
-    public Task<List<Cliente>> BuscarTodosClientes()
+    public Task<bool> ExcluirCliente(int id)
     {
-        return _clienteRepository.BuscarTodos();
+        throw new NotImplementedException();
     }
 }
