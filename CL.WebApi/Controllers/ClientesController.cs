@@ -33,7 +33,7 @@ public class ClientesController : ControllerBase
 
     // GET - pelo ID do cliente
     [HttpGet("{id}")]
-   public async Task<IActionResult> GetById(int id)
+    public async Task<IActionResult> GetById(int id)
     {
         if (id == 0)
         {
@@ -63,15 +63,55 @@ public class ClientesController : ControllerBase
             return BadRequest("Erro ao adicionar cliente.");
         }
 
-        return Created("", clienteAdicionado);
+        //return Created("", clienteAdicionado);
+
+        return CreatedAtAction(nameof(GetById), new { id = clienteAdicionado.Id }, clienteAdicionado);
 
     }
-   
+
 
     // PUT - Atualizar um cliente pelo Id
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Put(int id, [FromBody] Cliente cliente)
+    {
+
+        //if (id <= 0 || cliente == null || cliente.Id != id)
+        //{
+        //    return BadRequest("Id inválido ou cliente nulo.");
+        //}
+        //var clienteAtualizado = await _clienteManager.AtualizarCliente(cliente);
+        //if (clienteAtualizado == null)
+        //{
+        //    return NotFound("Cliente não encontrado para atualização.");
+        //}
+        //return Ok(clienteAtualizado);
+
+        if (id <= 0 || cliente == null || cliente.Id != id)
+        {
+            return BadRequest("Cliente não encontrado para atualização.");
+        }
+
+        var clienteAtualizado = await _clienteManager.AtualizarCliente(cliente);
+
+        return clienteAtualizado != null ? Ok(clienteAtualizado) : NotFound("Cliente não foi encontrado para atualização");
+
+    }
 
 
 
     // DELETE - Deletar Cliente pelo Id
+    public async Task<IActionResult> Delete(int id)
+    {
+        if (id <= 0)
+        {
+            return BadRequest("ID Inválido");
+        }
+
+        var resultado = await _clienteManager.ExcluirCliente(id);
+
+        return resultado ? NoContent() : NotFound("Cliente não encontrado para exclusão.");
+    }
+
+
 
 }

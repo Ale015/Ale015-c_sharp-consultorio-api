@@ -21,7 +21,7 @@ namespace CL.Data.Repository
 
         public async Task<Cliente> Inserir(Cliente cliente)
         {
-            _context.Clientes.Add(cliente);
+            await _context.Clientes.AddAsync(cliente);
 
             await _context.SaveChangesAsync();
 
@@ -49,7 +49,7 @@ namespace CL.Data.Repository
 
             if (clienteFinded == null)
             {
-                throw new KeyNotFoundException("Cliente não encontrado.");
+                return null;
             }
 
             //_context.Clientes.Update(cliente);
