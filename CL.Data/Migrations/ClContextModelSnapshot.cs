@@ -33,7 +33,22 @@ namespace CL.Data.Migrations
                     b.Property<DateTime>("DataNascimento")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<string>("Documento")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
                     b.Property<string>("Nome")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Sexo")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(1)
+                        .HasColumnType("character varying(1)")
+                        .HasDefaultValue("M");
+
+                    b.Property<string>("Telefone")
                         .HasColumnType("text");
 
                     b.HasKey("Id");

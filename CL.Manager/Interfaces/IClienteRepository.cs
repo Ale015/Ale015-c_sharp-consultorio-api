@@ -13,7 +13,7 @@ namespace CL.Manager.Interfaces
 
         public Task<List<Cliente>> BuscarTodos();
 
-        public Task<List<Cliente>> BuscarId(int id);
+        public Task<Cliente> BuscarId(int id);
 
         public Task<Cliente> Atualizar(Cliente cliente);
 

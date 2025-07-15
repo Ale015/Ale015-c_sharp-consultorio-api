@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CL.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class inicial : Migration
+    public partial class initialSetup : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,11 @@ namespace CL.Data.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Nome = table.Column<string>(type: "text", nullable: true),
-                    DataNascimento = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    DataNascimento = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    Email = table.Column<string>(type: "text", nullable: true),
+                    Sexo = table.Column<string>(type: "character varying(1)", maxLength: 1, nullable: true, defaultValue: "M"),
+                    Telefone = table.Column<string>(type: "text", nullable: true),
+                    Documento = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

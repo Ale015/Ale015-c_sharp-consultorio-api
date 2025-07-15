@@ -16,6 +16,10 @@ namespace CL.Data.Configuration
             builder.Property(c => c.DataNascimento)
                 .HasColumnType("timestamp without time zone")
                 .IsRequired();
+
+            builder.Property(c => c.Sexo)
+                .HasMaxLength(1)
+                .HasDefaultValue("M"); 
         }
     }
 }

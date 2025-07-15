@@ -39,12 +39,7 @@ public class ClienteManager : IClienteManager
 
         clientes = await _clienteRepository.BuscarTodos();
 
-        if ( clientes == null || clientes.Count == 0)
-        {
-            throw new InvalidOperationException("Nenhum cliente encontrado.");
-        }
-
-        return clientes;
+        return clientes ?? new List<Cliente>();
        
     }
 
@@ -64,14 +59,26 @@ public class ClienteManager : IClienteManager
         return await _clienteRepository.Atualizar(cliente);
     }
 
-    public async Task<List<Cliente>> BuscarClientePorId(int id)
+    public async Task<Cliente> BuscarClientePorId(int id)
     {
         return await _clienteRepository.BuscarId(id);
     }
 
     public async Task<bool> ExcluirCliente(int id)
     {
-        throw new NotImplementedException();
+        if (id <= 0)
+        {
+            throw new ArgumentException("ID inválido.", nameof(id));
+        }
+
+        var cliente = await _clienteRepository.BuscarId(id);
+
+        if (cliente == null)
+        {
+            return false;
+        }
+
+        return await _clienteRepository.Excluir(id);
     }
 
 }

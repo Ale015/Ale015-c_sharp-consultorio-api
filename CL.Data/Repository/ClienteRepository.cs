@@ -35,11 +35,9 @@ namespace CL.Data.Repository
         }
 
 
-        public async Task<List<Cliente>> BuscarId(int id)
+        public async Task<Cliente> BuscarId(int id)
         {
-
-            return await _context.Clientes.Where(c => c.Id == id).ToListAsync();
-
+            return await _context.Clientes.FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task<Cliente> Atualizar(Cliente cliente)
@@ -70,6 +68,8 @@ namespace CL.Data.Repository
             }
 
             _context.Clientes.Remove(cliente);
+
+            await _context.SaveChangesAsync();
 
             return true;
         }
