@@ -35,7 +35,7 @@ public class ClientesController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        if (id == 0)
+        if (id <= 0)
         {
             return BadRequest("Id inválido.");
         }
@@ -53,7 +53,11 @@ public class ClientesController : ControllerBase
         var clienteInterno = new Cliente
         {
             Nome = cliente.Nome,
-            DataNascimento = cliente.DataNascimento
+            DataNascimento = cliente.DataNascimento,
+            Email = cliente.Email,
+            Sexo = cliente.Sexo,
+            Telefone = cliente.Telefone,
+            Documento = cliente.Documento
         };
 
         var clienteAdicionado = await _clienteManager.AdicionarUmCliente(clienteInterno);
@@ -74,32 +78,34 @@ public class ClientesController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> Put(int id, [FromBody] Cliente cliente)
     {
-
-        //if (id <= 0 || cliente == null || cliente.Id != id)
-        //{
-        //    return BadRequest("Id inválido ou cliente nulo.");
-        //}
-        //var clienteAtualizado = await _clienteManager.AtualizarCliente(cliente);
-        //if (clienteAtualizado == null)
-        //{
-        //    return NotFound("Cliente não encontrado para atualização.");
-        //}
-        //return Ok(clienteAtualizado);
-
-        if (id <= 0 || cliente == null || cliente.Id != id)
+        if (id <= 0)
         {
-            return BadRequest("Cliente não encontrado para atualização.");
+            return BadRequest("ID inválido.");
         }
 
-        var clienteAtualizado = await _clienteManager.AtualizarCliente(cliente);
+        if (cliente == null)
+        {
+            return BadRequest("Cliente não pode ser nulo.");
+        }
 
-        return clienteAtualizado != null ? Ok(clienteAtualizado) : NotFound("Cliente não foi encontrado para atualização");
+        cliente.Id = id; // Garantir que o ID está correto
 
+        try
+        {
+            var clienteAtualizado = await _clienteManager.AtualizarCliente(cliente);
+            
+            return clienteAtualizado != null ? Ok(clienteAtualizado) : NotFound("Cliente não encontrado para atualização.");
+        }
+        catch (ArgumentException ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
 
 
     // DELETE - Deletar Cliente pelo Id
+    [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {
         if (id <= 0)
