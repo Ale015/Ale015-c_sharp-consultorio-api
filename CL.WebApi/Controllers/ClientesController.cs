@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using CL.Core.Domain;
 using CL.Manager.Interfaces;
+using CL.Manager.Validator;
 
 namespace CL.WebApi.Controllers;
 
@@ -60,19 +61,30 @@ public class ClientesController : ControllerBase
             Documento = cliente.Documento
         };
 
-        var clienteAdicionado = await _clienteManager.AdicionarUmCliente(clienteInterno);
 
-        if (clienteAdicionado == null)
+        ClienteValidator validator = new ClienteValidator();
+        var validation = validator.Validate(clienteInterno);
+        if (validation.IsValid)
         {
-            return BadRequest("Erro ao adicionar cliente.");
+            var clienteAdicionado = await _clienteManager.AdicionarUmCliente(clienteInterno);
+
+
+            if (clienteAdicionado == null)
+            {
+                return BadRequest("Erro ao adicionar cliente.");
+            }
+
+            //return Created("", clienteAdicionado);
+
+            return CreatedAtAction(nameof(GetById), new { id = clienteAdicionado.Id }, clienteAdicionado);
+
         }
+        else
+        {
+            return BadRequest(validation.ToString());
 
-        //return Created("", clienteAdicionado);
-
-        return CreatedAtAction(nameof(GetById), new { id = clienteAdicionado.Id }, clienteAdicionado);
-
+        }
     }
-
 
     // PUT - Atualizar um cliente pelo Id
     [HttpPut("{id}")]
