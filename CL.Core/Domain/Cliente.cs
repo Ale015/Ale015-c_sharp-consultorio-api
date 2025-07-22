@@ -15,23 +15,9 @@ namespace CL.Core.Domain
         public string Sexo { get; set; }
         public string Telefone { get; set; }
         public string Documento { get; set; }
+        public DateTime DataCadastro { get; set; } = DateTime.Now;
+        public DateTime? DataAtualizacao { get; set; } = DateTime.Now;
 
-        public Cliente(Cliente cliente)
-        {
-            Id = cliente.Id;
-            Nome = cliente.Nome;
-            DataNascimento = cliente.DataNascimento;
-            Email = cliente.Email;
-            Sexo = cliente.Sexo;
-            Telefone = cliente.Telefone;
-            Documento = cliente.Documento;
-
-        }
-
-        public Cliente()
-        {
-
-        }
 
 
     }

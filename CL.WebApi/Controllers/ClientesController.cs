@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using CL.Core.Domain;
 using CL.Manager.Interfaces;
 using CL.Manager.Validator;
+using CL.Core.Shared.ModelViews;
 
 namespace CL.WebApi.Controllers;
 
@@ -49,24 +50,15 @@ public class ClientesController : ControllerBase
 
     // POST - Criar novo cliente
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Cliente cliente)
+    public async Task<IActionResult> Post([FromBody] NovoCliente cliente)
     {
-        var clienteInterno = new Cliente
-        {
-            Nome = cliente.Nome,
-            DataNascimento = cliente.DataNascimento,
-            Email = cliente.Email,
-            Sexo = cliente.Sexo,
-            Telefone = cliente.Telefone,
-            Documento = cliente.Documento
-        };
 
 
         ClienteValidator validator = new ClienteValidator();
-        var validation = validator.Validate(clienteInterno);
+        var validation = validator.Validate(cliente);
         if (validation.IsValid)
         {
-            var clienteAdicionado = await _clienteManager.AdicionarUmCliente(clienteInterno);
+            var clienteAdicionado = await _clienteManager.AdicionarUmCliente(cliente);
 
 
             if (clienteAdicionado == null)
