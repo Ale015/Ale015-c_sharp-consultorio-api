@@ -3,14 +3,21 @@ using CL.Data.Context;
 using CL.Data.Repository;
 using CL.Manager.Implementations;
 using CL.Manager.Interfaces;
+using CL.Manager.Validator;
 using FluentAssertions.Common;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Adição de serviços ao contêiner.
 // Adição de Controller I Endpoints I Swagger
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation(p =>
+    {
+        p.RegisterValidatorsFromAssemblyContaining<ClienteValidator>();
+        p.ValidatorOptions.LanguageManager.Culture = new CultureInfor("pt-BR");
+    }
+);
 
 builder.Services.AddDbContext<ClContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("db_consultorio")));
 

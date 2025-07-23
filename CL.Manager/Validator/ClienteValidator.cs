@@ -16,6 +16,7 @@ namespace CL.Manager.Validator
             
             RuleFor(c => c.Nome).NotEmpty().WithMessage("O nome do cliente não pode ser vazio.")
                 .Length(2, 100).WithMessage("O nome do cliente deve ter entre 2 e 100 caracteres.");
+            RuleFor(x => x.DataNascimento).NotNull().NotEmpty().LessThan(DateTime.Now).GreatherThan(DateTime.Now.AddYears(-140));
             RuleFor(c => c.Email).NotEmpty().WithMessage("O Email não pode ser vazio.");
             RuleFor(c => c.Sexo).Must(s => s == "M" || s == "F").WithMessage("O sexo deve ser 'M' ou 'F'.");
             RuleFor(c => c.Telefone).NotEmpty().WithMessage("O telefone não pode ser vazio.")

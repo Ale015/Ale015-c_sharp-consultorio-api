@@ -4,6 +4,7 @@ using CL.Core.Domain;
 using CL.Manager.Interfaces;
 using CL.Manager.Validator;
 using CL.Core.Shared.ModelViews;
+using CL.Core.Shared;
 
 namespace CL.WebApi.Controllers;
 
@@ -54,10 +55,7 @@ public class ClientesController : ControllerBase
     {
 
 
-        ClienteValidator validator = new ClienteValidator();
-        var validation = validator.Validate(cliente);
-        if (validation.IsValid)
-        {
+        
             var clienteAdicionado = await _clienteManager.AdicionarUmCliente(cliente);
 
 
@@ -70,12 +68,6 @@ public class ClientesController : ControllerBase
 
             return CreatedAtAction(nameof(GetById), new { id = clienteAdicionado.Id }, clienteAdicionado);
 
-        }
-        else
-        {
-            return BadRequest(validation.ToString());
-
-        }
     }
 
     // PUT - Atualizar um cliente pelo Id
