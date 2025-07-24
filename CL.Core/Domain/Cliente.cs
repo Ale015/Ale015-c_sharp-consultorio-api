@@ -15,8 +15,8 @@ namespace CL.Core.Domain
         public string Sexo { get; set; }
         public string Telefone { get; set; }
         public string Documento { get; set; }
-        public DateTime DataCadastro { get; set; } = DateTime.Now;
-        public DateTime? DataAtualizacao { get; set; } = DateTime.Now;
+        public DateTime DataCadastro { get; set; } 
+        public DateTime? DataAtualizacao { get; set; }
 
 
 

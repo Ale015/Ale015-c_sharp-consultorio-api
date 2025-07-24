@@ -1,4 +1,5 @@
 ﻿using CL.Core.Domain;
+using CL.Core.Shared.ModelViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace CL.Manager.Interfaces
 {
     public interface IClienteManager
     {
-        public Task<Cliente> AdicionarUmCliente(Cliente cliente);
+        public Task<Cliente> AdicionarUmCliente(NovoCliente cliente);
 
         public Task<List<Cliente>> BuscarTodosClientes();
 

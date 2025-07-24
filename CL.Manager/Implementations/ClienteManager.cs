@@ -1,4 +1,5 @@
 ﻿using CL.Core.Domain;
+using CL.Core.Shared.ModelViews;
 using CL.Manager.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ public class ClienteManager : IClienteManager
         _clienteRepository = clienteRepository;
     }
 
-    public async Task<Cliente> AdicionarUmCliente(Cliente clientinho)
+    public async Task<Cliente> AdicionarUmCliente(NovoCliente clientinho)
     {
 
         if (clientinho == null)
