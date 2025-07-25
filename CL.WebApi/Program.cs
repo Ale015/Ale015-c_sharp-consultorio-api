@@ -7,6 +7,7 @@ using CL.Manager.Validator;
 using FluentAssertions.Common;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddFluentValidation(p =>
     {
         p.RegisterValidatorsFromAssemblyContaining<ClienteValidator>();
-        p.ValidatorOptions.LanguageManager.Culture = new CultureInfor("pt-BR");
+        p.ValidatorOptions.LanguageManager.Culture = new CultureInfo("pt-BR");
     }
 );
 

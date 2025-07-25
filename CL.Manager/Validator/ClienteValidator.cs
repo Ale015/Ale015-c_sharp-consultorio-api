@@ -1,4 +1,5 @@
 ﻿using CL.Core.Domain;
+using CL.Core.Shared.ModelViews;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CL.Manager.Validator
 {
-    public class ClienteValidator : AbstractValidator<Cliente>
+    public class ClienteValidator : AbstractValidator<NovoCliente>
     {
 
         public ClienteValidator()

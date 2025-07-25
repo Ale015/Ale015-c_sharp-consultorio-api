@@ -18,26 +18,29 @@ public class ClienteManager : IClienteManager
         _clienteRepository = clienteRepository;
     }
 
-    public async Task<Cliente> AdicionarUmCliente(NovoCliente clientinho)
+    public async Task<Cliente> AdicionarUmCliente(NovoCliente cliente)
     {
 
-        if (clientinho == null)
+        if (cliente == null)
         {
-            throw new ArgumentNullException(nameof(clientinho), "Cliente não pode ser nulo.");
+            throw new ArgumentNullException(nameof(cliente), "Cliente não pode ser nulo.");
         }
 
-        if (string.IsNullOrWhiteSpace(clientinho.Nome))
+        if (string.IsNullOrWhiteSpace(cliente.Nome))
         {
-            throw new ArgumentException("Nome do cliente não pode ser vazio.", nameof(clientinho.Nome));
+            throw new ArgumentException("Nome do cliente não pode ser vazio.", nameof(cliente.Nome));
         }
 
-        if (clientinho.Sexo != "M"  && clientinho.Sexo != "F")
+        if (cliente.Sexo != "M"  && cliente.Sexo != "F")
         {
 
-            throw new ArgumentException("Sexo deve ser 'M' ou 'F'.", nameof(clientinho.Sexo));
+            throw new ArgumentException("Sexo deve ser 'M' ou 'F'.", nameof(cliente.Sexo));
         }
 
-        return await _clienteRepository.Inserir(clientinho);
+
+        var clienteInputed = new Cliente(cliente);
+
+        return await _clienteRepository.Inserir(clienteInputed);
     }
 
     public async Task<List<Cliente>> BuscarTodosClientes()
@@ -51,7 +54,7 @@ public class ClienteManager : IClienteManager
     }
 
 
-    public async Task<Cliente> AtualizarCliente(Cliente cliente)
+    public async Task<Cliente> AtualizarCliente(NovoCliente cliente)
     {
         if (cliente == null)
         {
@@ -63,7 +66,12 @@ public class ClienteManager : IClienteManager
             throw new ArgumentException("Nome do cliente não pode ser vazio.", nameof(cliente.Nome));
         }
 
-        return await _clienteRepository.Atualizar(cliente);
+        var clienteExistente = new Cliente(cliente)
+        {
+            DataAtualizacao = DateTime.Now
+        };
+
+        return await _clienteRepository.Atualizar(clienteExistente);
     }
 
     public async Task<Cliente> BuscarClientePorId(int id)

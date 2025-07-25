@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CL.Core.Shared.ModelViews;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,20 @@ namespace CL.Core.Domain
         public DateTime DataCadastro { get; set; } 
         public DateTime? DataAtualizacao { get; set; }
 
+        public Cliente(NovoCliente cliente)
+        {
+            Nome = cliente.Nome;
+            DataNascimento = cliente.DataNascimento;
+            Email = cliente.Email;
+            Sexo = cliente.Sexo;
+            Telefone = cliente.Telefone;
+            Documento = cliente.Documento;
+            DataCadastro = DateTime.Now;
+
+        }
+
+        public Cliente() {
+        }
 
 
     }

@@ -16,7 +16,7 @@ namespace CL.Manager.Interfaces
 
         public Task<Cliente> BuscarClientePorId(int id);
 
-        public Task<Cliente> AtualizarCliente(Cliente cliente);
+        public Task<Cliente> AtualizarCliente(NovoCliente cliente);
 
         public Task<bool> ExcluirCliente(int id);
     }

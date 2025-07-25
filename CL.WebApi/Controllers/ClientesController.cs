@@ -72,7 +72,7 @@ public class ClientesController : ControllerBase
 
     // PUT - Atualizar um cliente pelo Id
     [HttpPut("{id}")]
-    public async Task<IActionResult> Put(int id, [FromBody] Cliente cliente)
+    public async Task<IActionResult> Put(int id, [FromBody] NovoCliente cliente)
     {
         if (id <= 0)
         {
@@ -83,8 +83,6 @@ public class ClientesController : ControllerBase
         {
             return BadRequest("Cliente não pode ser nulo.");
         }
-
-        cliente.Id = id; // Garantir que o ID está correto
 
         try
         {
