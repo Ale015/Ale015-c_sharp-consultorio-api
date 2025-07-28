@@ -14,6 +14,5 @@ namespace CL.Core.Shared.ModelViews
         public string Sexo { get; set; }
         public string Telefone { get; set; }
         public string Documento { get; set; }
-
     }
 }

@@ -16,7 +16,7 @@ namespace CL.Core.Domain
         public string Sexo { get; set; }
         public string Telefone { get; set; }
         public string Documento { get; set; }
-        public DateTime DataCadastro { get; set; } 
+        public DateTime DataCadastro { get; set; }
         public DateTime? DataAtualizacao { get; set; }
 
         public Cliente(NovoCliente cliente)
@@ -28,14 +28,10 @@ namespace CL.Core.Domain
             Telefone = cliente.Telefone;
             Documento = cliente.Documento;
             DataCadastro = DateTime.Now;
-
         }
 
-        public Cliente() {
+        public Cliente()
+        {
         }
-
-
     }
-
-
 }

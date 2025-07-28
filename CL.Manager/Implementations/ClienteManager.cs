@@ -20,7 +20,6 @@ public class ClienteManager : IClienteManager
 
     public async Task<Cliente> AdicionarUmCliente(NovoCliente cliente)
     {
-
         if (cliente == null)
         {
             throw new ArgumentNullException(nameof(cliente), "Cliente não pode ser nulo.");
@@ -31,12 +30,10 @@ public class ClienteManager : IClienteManager
             throw new ArgumentException("Nome do cliente não pode ser vazio.", nameof(cliente.Nome));
         }
 
-        if (cliente.Sexo != "M"  && cliente.Sexo != "F")
+        if (cliente.Sexo != "M" && cliente.Sexo != "F")
         {
-
             throw new ArgumentException("Sexo deve ser 'M' ou 'F'.", nameof(cliente.Sexo));
         }
-
 
         var clienteInputed = new Cliente(cliente);
 
@@ -50,11 +47,9 @@ public class ClienteManager : IClienteManager
         clientes = await _clienteRepository.BuscarTodos();
 
         return clientes ?? new List<Cliente>();
-       
     }
 
-
-    public async Task<Cliente> AtualizarCliente(NovoCliente cliente)
+    public async Task<Cliente> AtualizarCliente(AtualizaCliente cliente)
     {
         if (cliente == null)
         {
@@ -68,7 +63,8 @@ public class ClienteManager : IClienteManager
 
         var clienteExistente = new Cliente(cliente)
         {
-            DataAtualizacao = DateTime.Now
+            Id = cliente.Id,
+            DataAtualizacao = DateTime.Now,
         };
 
         return await _clienteRepository.Atualizar(clienteExistente);
@@ -95,5 +91,4 @@ public class ClienteManager : IClienteManager
 
         return await _clienteRepository.Excluir(id);
     }
-
 }

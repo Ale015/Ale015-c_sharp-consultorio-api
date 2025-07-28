@@ -46,28 +46,22 @@ public class ClientesController : ControllerBase
         var cliente = await _clienteManager.BuscarClientePorId(id);
 
         return cliente != null ? Ok(cliente) : NotFound("Cliente não encontrado.");
-
     }
 
     // POST - Criar novo cliente
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] NovoCliente cliente)
     {
+        var clienteAdicionado = await _clienteManager.AdicionarUmCliente(cliente);
 
+        if (clienteAdicionado == null)
+        {
+            return BadRequest("Erro ao adicionar cliente.");
+        }
 
-        
-            var clienteAdicionado = await _clienteManager.AdicionarUmCliente(cliente);
+        //return Created("", clienteAdicionado);
 
-
-            if (clienteAdicionado == null)
-            {
-                return BadRequest("Erro ao adicionar cliente.");
-            }
-
-            //return Created("", clienteAdicionado);
-
-            return CreatedAtAction(nameof(GetById), new { id = clienteAdicionado.Id }, clienteAdicionado);
-
+        return CreatedAtAction(nameof(GetById), new { id = clienteAdicionado.Id }, clienteAdicionado);
     }
 
     // PUT - Atualizar um cliente pelo Id
@@ -86,9 +80,13 @@ public class ClientesController : ControllerBase
 
         try
         {
-            
-            var clienteAtualizado = await _clienteManager.AtualizarCliente(cliente);
-            
+            var atualizaCliente = new AtualizaCliente(cliente)
+            {
+                Id = id
+            };
+
+            var clienteAtualizado = await _clienteManager.AtualizarCliente(atualizaCliente);
+
             return clienteAtualizado != null ? Created("", clienteAtualizado) : NotFound("Cliente não encontrado para atualização.");
         }
         catch (ArgumentException ex)
@@ -96,8 +94,6 @@ public class ClientesController : ControllerBase
             return BadRequest(ex.Message);
         }
     }
-
-
 
     // DELETE - Deletar Cliente pelo Id
     [HttpDelete("{id}")]
@@ -112,7 +108,4 @@ public class ClientesController : ControllerBase
 
         return resultado ? NoContent() : NotFound("Cliente não encontrado para exclusão.");
     }
-
-
-
 }
