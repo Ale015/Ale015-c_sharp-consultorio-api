@@ -11,6 +11,9 @@ using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 // Adição de serviços ao contêiner.
 // Adição de Controller I Endpoints I Swagger
 builder.Services.AddControllers().AddFluentValidation(p =>

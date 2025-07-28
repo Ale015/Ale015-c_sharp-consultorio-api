@@ -21,7 +21,7 @@ namespace CL.Manager.Validator
             RuleFor(c => c.Email).NotEmpty().WithMessage("O Email não pode ser vazio.");
             RuleFor(c => c.Sexo).Must(s => s == "M" || s == "F").WithMessage("O sexo deve ser 'M' ou 'F'.");
             RuleFor(c => c.Telefone).NotEmpty().WithMessage("O telefone não pode ser vazio.")
-                .Matches("[2-9][0-9]{10}").WithMessage("O telefone deve conter entre 10 e 15 dígitos.");
+                 .Matches("^[0-9]{9,15}$").WithMessage("O telefone deve conter entre 9 e 15 dígitos.");
             RuleFor(c => c.Documento).NotEmpty().WithMessage("O documento não pode ser vazio.");
 
 
