@@ -16,8 +16,4 @@
     <ProjectReference Include="..\CL.Core\CL.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mappings\" />
-  </ItemGroup>
-
 </Project>

@@ -86,9 +86,10 @@ public class ClientesController : ControllerBase
 
         try
         {
+            
             var clienteAtualizado = await _clienteManager.AtualizarCliente(cliente);
             
-            return clienteAtualizado != null ? Ok(clienteAtualizado) : NotFound("Cliente não encontrado para atualização.");
+            return clienteAtualizado != null ? Created("", clienteAtualizado) : NotFound("Cliente não encontrado para atualização.");
         }
         catch (ArgumentException ex)
         {
